@@ -17,10 +17,5 @@ if (app.get("env") === "development") {
   app.use(morgan("tiny"));
 }
 
-app.get("/", (req,res) => {
-    debug("hi")
-    res.send("hello")
-})
-
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
