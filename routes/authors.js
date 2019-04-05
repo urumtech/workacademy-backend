@@ -8,6 +8,9 @@ const {
   } = require("../models/author")
 const router = express.Router()
 
+/*  ***********************************
+// POST a new user from the admin panel
+**  **********************************/
 router.post("/", async (req, res) => {
   const { error } = validateAuthor(req.body);
   if (error) return res.status(400).send(error.details[0].message);

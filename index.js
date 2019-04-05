@@ -34,7 +34,7 @@ app.use(helmet());
 if (app.get("env") === "development") {
   app.use(morgan("tiny"));
 }
-app.use("/api/admin/users", authors);
+app.use("/api/admin/authors", authors);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
