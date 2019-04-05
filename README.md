@@ -12,6 +12,6 @@ Full API documentation.
 
 ## Contributors
 
-Pouya Pourbaba
-Afshin Haghighatnia
+- Pouya Pourbaba
+- Afshin Haghighatnia
  
