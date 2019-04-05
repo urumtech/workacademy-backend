@@ -1,7 +1,25 @@
+const mongoose = require("mongoose");
+const config = require("config")
 const morgan = require("morgan");
 const helmet = require("helmet");
 const express = require("express");
 const app = express();
+
+// check the dbConnectionString in the environment variables
+if (!config.get("dbConnectionString")) {
+  console.error("FATAL ERROR: dbConnectionString is not defined.")
+  process.exit(1);
+}
+
+// connect to DB
+mongoose
+  .connect(`${config.get("dbConnectionString")}/workacademy`, {
+    useCreateIndex: true,
+    useNewUrlParser: true
+  })
+  .then(() => console.log("Connected to MongoDB.."))
+  .catch(err => console.error("Could not connect to MongoDB..", err));
+
 
 // Parse the body if the request and if there is a json object it populates "req.body"
 app.use(express.json());
