@@ -1,73 +1,74 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
+const passwordValidator = require("password-validator");
 
 // author schema
 const authorSchema = new mongoose.Schema({
-  author_firstName: {
+  first_name: {
     type: String,
     required: true,
     minlength: 4,
     maxlength: 255
   },
-  author_lastName: {
+  last_name: {
     type: String,
     required: true,
     minlength: 4,
     maxlength: 255
   },
-  author_userName: {
+  user_name: {
     type: String,
     required: true,
     minlength: 4,
     maxlength: 255
   },
-  author_email: {
+  email: {
     type: String,
     required: true,
     minlength: 6,
     maxlength: 255,
     unique: true
   },
-  author_password: {
+  password: {
     type: String,
     required: true,
     minlength: 6,
     maxlength: 1024,
     unique: true
   },
-  author_status: {
+  status: {
     type: Number,
     required: true
   },
-  author_role: [Number]
+  role: [Number]
 });
 
 // user validator by Joi
 function validateAuthor(user) {
   const schema = {
-    author_firstName: Joi.string()
+    first_name: Joi.string()
       .min(4)
       .max(255)
       .required(),
-    author_lastName: Joi.string()
+    last_name: Joi.string()
       .min(4)
       .max(255)
       .required(),
-    author_userName: Joi.string()
+    user_name: Joi.string()
       .min(4)
       .max(255)
       .required(),
-    author_email: Joi.string()
+    email: Joi.string()
       .min(6)
       .max(255)
       .required()
       .email(),
-    author_password: Joi.string()
+    password: Joi.string()
       .min(6)
       .max(255)
       .required(),
-    author_role: Joi.number().required(),
-    author_status: Joi.number().required()
+    role: Joi.number().required(),
+    status: Joi.number().required()
   };
 
   return Joi.validate(user, schema);
