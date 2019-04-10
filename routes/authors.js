@@ -1,12 +1,12 @@
-const express = require("express")
-const _ = require("lodash")
-const bcrypt = require("bcrypt")
+const express = require("express");
+const _ = require("lodash");
+const bcrypt = require("bcrypt");
 const {
-    Author,
-    validateAuthor,
-    validatePasswordComplexity
-  } = require("../models/author")
-const router = express.Router()
+  Author,
+  validateAuthor,
+  validatePasswordComplexity
+} = require("../models/author");
+const router = express.Router();
 
 /*  ***********************************
 // POST a new user from the admin panel
@@ -53,6 +53,22 @@ router.post("/", async (req, res) => {
   res.send(
     _.pick(author, ["_id", "first_name", "last_name", "user_name", "email"])
   );
-})
+});
+
+/* ********************************************
+ * GET the list of authors from the admin panel
+ ** *******************************************/
+router.get("/", async (req, res) => {
+  const authors = await Author.find();
+  res.send(authors);
+});
+
+/* ********************************************
+ * GET one author by ID
+ ** *******************************************/
+router.get("/:author_id", async (req, res) => {
+  const author = await Author.find({ _id: req.params.author_id });
+  res.send(author);
+});
 
 module.exports = router;
